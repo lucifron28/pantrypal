@@ -2,16 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:pantrypal/screens/pantry_screen.dart';
 import 'package:pantrypal/screens/recipe_suggestions_screen.dart';
 import 'package:pantrypal/screens/paywall_screen.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:pantrypal/providers/app_providers.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
-
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  int _selectedIndex = 0;
 
   static final List<Widget> _screens = <Widget>[
     PantryScreen(),
@@ -19,16 +14,12 @@ class _HomeScreenState extends State<HomeScreen> {
     PaywallScreen(),
   ];
 
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final selectedIndex = ref.watch(bottomNavIndexProvider);
+
     return Scaffold(
-      body: _screens[_selectedIndex],
+      body: _screens[selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
@@ -44,8 +35,8 @@ class _HomeScreenState extends State<HomeScreen> {
             label: 'Paywall',
           ),
         ],
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
+        currentIndex: selectedIndex,
+        onTap: (index) => ref.read(bottomNavIndexProvider.notifier).state = index,
       ),
     );
   }
