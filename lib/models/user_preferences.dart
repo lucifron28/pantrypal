@@ -1,14 +1,35 @@
 import 'package:uuid/uuid.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
+part 'user_preferences.g.dart';
+
+@HiveType(typeId: 4)
 class UserPreferences {
+  @HiveField(0)
   final String userId;
+
+  @HiveField(1)
   final List<String> favoriteRecipeIds;
+
+  @HiveField(2)
   final List<String> dietaryPreferences;
+
+  @HiveField(3)
   final List<String> excludedIngredients;
+
+  @HiveField(4)
   final List<String> preferredCuisines;
+
+  @HiveField(5)
   final double? budgetLimit;
+
+  @HiveField(6)
   final double? maxPrepTime;
+
+  @HiveField(7)
   final bool? expiryNotifications;
+
+  @HiveField(8)
   final String? locale;
 
   UserPreferences({
