@@ -1,26 +1,37 @@
 import 'package:flutter/material.dart';
-import 'screens/home_screen.dart';
-import 'screens/pantry_screen.dart';
-import 'screens/recipe_suggestions_screen.dart';
-import 'screens/paywall_screen.dart';
+import 'package:pantrypal/screens/home_screen.dart';
+import 'package:pantrypal/screens/pantry_screen.dart';
+import 'package:pantrypal/screens/recipe_suggestions_screen.dart';
+import 'package:pantrypal/screens/paywall_screen.dart';
+import 'package:dynamic_color/dynamic_color.dart';
+import 'package:pantrypal/theme.dart';
 
 class PantryPalApp extends StatelessWidget {
   const PantryPalApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'PantryPal',
-      theme: ThemeData(
-        useMaterial3: true,
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
-      ),
-      initialRoute: '/',
-      routes: {
-        '/': (context) => HomeScreen(),
-        '/pantry': (context) => PantryScreen(),
-        '/recipes': (context) => RecipeSuggestionsScreen(),
-        '/paywall': (context) => PaywallScreen(),
+    return DynamicColorBuilder(
+      builder: (ColorScheme? dynamicLight, ColorScheme? dynamicDark) {
+        return MaterialApp(
+          title: 'PantryPal',
+          theme: ThemeData(
+            useMaterial3: true,
+            colorScheme: dynamicLight ?? lightScheme,
+          ),
+          darkTheme: ThemeData(
+            useMaterial3: true,
+            colorScheme: dynamicDark ?? darkScheme,
+          ),
+          themeMode: ThemeMode.system,
+          initialRoute: '/',
+          routes: {
+            '/': (context) => HomeScreen(),
+            '/pantry': (context) => PantryScreen(),
+            '/recipes': (context) => RecipeSuggestionsScreen(),
+            '/paywall': (context) => PaywallScreen(),
+          },
+        );
       },
     );
   }
