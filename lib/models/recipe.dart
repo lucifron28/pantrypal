@@ -1,17 +1,42 @@
 import 'package:pantrypal/models/ingredient.dart';
 import 'package:uuid/uuid.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
+part 'recipe.g.dart';
+
+@HiveType(typeId: 2)
 class Recipe {
+  @HiveField(0)
   final String id;
+
+  @HiveField(1)
   final String title;
+
+  @HiveField(2)
   final List<Ingredient> ingredients;
+
+  @HiveField(3)
   final List<String> instructions;
+
+  @HiveField(4)
   final int? prepTimeMinutes;
+
+  @HiveField(5)
   final int? cookTimeMinutes;
+
+  @HiveField(6)
   final int? difficulty; // 1-5
+
+  @HiveField(7)
   final String? cuisine;
+
+  @HiveField(8)
   final String? imageUrl;
+
+  @HiveField(9)
   final List<String>? tags;
+
+  @HiveField(10)
   final String? authorId;
 
   Recipe({
