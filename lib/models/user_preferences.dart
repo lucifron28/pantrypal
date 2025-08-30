@@ -2,22 +2,25 @@ import 'package:uuid/uuid.dart';
 
 class UserPreferences {
   final String userId;
-  final List<String> favoriteRecipesIds;
+  final List<String> favoriteRecipeIds;
   final List<String> dietaryPreferences;
   final List<String> excludedIngredients;
   final List<String> preferredCuisines;
   final double? budgetLimit;
   final double? maxPrepTime;
-
+  final bool? expiryNotifications;
+  final String? locale;
 
   UserPreferences({
     required this.userId,
-    this.favoriteRecipesIds = const [],
+    this.favoriteRecipeIds = const [],
     this.dietaryPreferences = const [],
     this.excludedIngredients = const [],
     this.preferredCuisines = const [],
-    this.budgetLimit = 0.0,
-    this.maxPrepTime = 0.0,
+    this.budgetLimit,
+    this.maxPrepTime,
+    this.expiryNotifications,
+    this.locale,
   });
 
   factory UserPreferences.newUser() {
@@ -27,15 +30,29 @@ class UserPreferences {
     );
   }
 
+  Map<String, dynamic> toJson() => {
+        'userId': userId,
+        'favoriteRecipeIds': favoriteRecipeIds,
+        'dietaryPreferences': dietaryPreferences,
+        'excludedIngredients': excludedIngredients,
+        'preferredCuisines': preferredCuisines,
+        'budgetLimit': budgetLimit,
+        'maxPrepTime': maxPrepTime,
+        'expiryNotifications': expiryNotifications,
+        'locale': locale,
+      };
+
   factory UserPreferences.fromJson(Map<String, dynamic> json) {
     return UserPreferences(
       userId: json['userId'],
-      favoriteRecipesIds: List<String>.from(json['favoriteRecipesIds'] ?? []),
+      favoriteRecipeIds: List<String>.from(json['favoriteRecipeIds'] ?? []),
       dietaryPreferences: List<String>.from(json['dietaryPreferences'] ?? []),
       excludedIngredients: List<String>.from(json['excludedIngredients'] ?? []),
       preferredCuisines: List<String>.from(json['preferredCuisines'] ?? []),
       budgetLimit: (json['budgetLimit'] as num?)?.toDouble(),
       maxPrepTime: (json['maxPrepTime'] as num?)?.toDouble(),
+      expiryNotifications: json['expiryNotifications'],
+      locale: json['locale'],
     );
   }
 }
