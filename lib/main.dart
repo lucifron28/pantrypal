@@ -1,24 +1,29 @@
 import 'package:flutter/material.dart';
+import 'screens/home_screen.dart';
+import 'screens/pantry_screen.dart';
+import 'screens/recipe_suggestions_screen.dart';
+import 'screens/paywall_screen.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(PantryPalApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
+class PantryPalApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: "PantryPal",
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text("PantryPal"),
-        ),
-        body: const Center(
-          child: Text("Hello, PantryPal!"),
-        ),
+      title: 'PantryPal',
+      theme: ThemeData(
+        useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
       ),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => HomeScreen(),
+        '/pantry': (context) => PantryScreen(),
+        '/recipes': (context) => RecipeSuggestionsScreen(),
+        '/paywall': (context) => PaywallScreen(),
+      },
     );
   }
 }
