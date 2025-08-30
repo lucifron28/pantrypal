@@ -1,4 +1,13 @@
-// Recipe model
+import 'package:pantrypal/models/ingredient.dart';
+
 class Recipe {
-  // TODO: Define properties
+  final String title;
+  final List<Ingredient> ingredients;
+  final List<String> instructions;
+
+  Recipe({
+    required this.title,
+    required this.ingredients,
+    required this.instructions,
+  });
 }
