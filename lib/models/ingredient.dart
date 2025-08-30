@@ -1,11 +1,26 @@
 import 'package:uuid/uuid.dart';
+import 'package:hive/hive.dart';
 
+part 'ingredient.g.dart';
+
+@HiveType(typeId: 1)
 class Ingredient {
+  @HiveField(0)
   final String id;
+
+  @HiveField(1)
   final String name;
+
+  @HiveField(2)
   final String quantity;
+
+  @HiveField(3)
   final DateTime? expiryDate;
+
+  @HiveField(4)
   final String? category;
+
+  @HiveField(5)
   final String? notes;
 
   Ingredient({
