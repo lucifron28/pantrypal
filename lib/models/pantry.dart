@@ -1,10 +1,23 @@
-import 'ingredient.dart';
+import 'package:pantrypal/models/ingredient.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
+part 'pantry.g.dart';
+
+@HiveType(typeId: 3)
 class Pantry {
+  @HiveField(0)
   final String id;
+
+  @HiveField(1)
   final String name;
+
+  @HiveField(2)
   final List<Ingredient> ingredients;
+
+  @HiveField(3)
   final String ownerId;
+
+  @HiveField(4)
   final List<String>? sharedWithUserIds;
 
   Pantry({
