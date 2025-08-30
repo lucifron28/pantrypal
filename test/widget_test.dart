@@ -7,7 +7,7 @@
 
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:pantrypal/main.dart';
+import 'package:pantrypal/app.dart';
 
 void main() {
   testWidgets('Ingredient List Widget test', (WidgetTester tester) async {
