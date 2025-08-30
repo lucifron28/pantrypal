@@ -5,6 +5,7 @@ import 'package:pantrypal/models/recipe.dart';
 import 'package:pantrypal/models/pantry.dart';
 import 'package:pantrypal/models/user_preferences.dart';
 import 'package:pantrypal/app.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,5 +22,5 @@ void main() async {
   await Hive.openBox<Pantry>('pantries');
   await Hive.openBox<UserPreferences>('user_preferences');
 
-  runApp(const PantryPalApp());
+  runApp(const ProviderScope(child: PantryPalApp()));
 }
