@@ -9,6 +9,8 @@ void main() {
 }
 
 class PantryPalApp extends StatelessWidget {
+  const PantryPalApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
