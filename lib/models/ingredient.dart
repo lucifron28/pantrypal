@@ -1,4 +1,9 @@
-// Ingredient model
 class Ingredient {
-  // TODO: Define properties
+  final String name;
+  final String quantity;
+
+  Ingredient({
+    required this.name,
+    required this.quantity,
+  });
 }
