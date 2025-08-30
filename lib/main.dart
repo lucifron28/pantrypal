@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:pantrypal/models/ingredient.dart';
 import 'package:pantrypal/models/recipe.dart';
+import 'package:pantrypal/models/pantry.dart';
 import 'package:pantrypal/app.dart';
 
 void main() async {
@@ -11,9 +12,11 @@ void main() async {
 
   Hive.registerAdapter(IngredientAdapter());
   Hive.registerAdapter(RecipeAdapter());
+  
 
   await Hive.openBox<Ingredient>('ingredients');
   await Hive.openBox<Recipe>('recipes');
+  await Hive.openBox<Pantry>('pantries');
 
   runApp(const PantryPalApp());
 }
