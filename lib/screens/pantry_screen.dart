@@ -9,7 +9,7 @@ class PantryScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final pantryAsync = ref.watch(pantryProvider);
+  final pantry = ref.watch(pantryProvider);
     final colorScheme = Theme.of(context).colorScheme;
 
     return Scaffold(
@@ -19,11 +19,7 @@ class PantryScreen extends ConsumerWidget {
         foregroundColor: colorScheme.onSurface,
         elevation: 0,
       ),
-      body: pantryAsync.when(
-        data: (pantry) => PantryList(pantry: pantry),
-        loading: () => const Center(child: CircularProgressIndicator()),
-        error: (e, st) => Center(child: Text('Error: $e')),
-      ),
+      body: PantryList(pantry: pantry),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           final ingredient = await showDialog(
@@ -31,8 +27,7 @@ class PantryScreen extends ConsumerWidget {
             builder: (context) => const AddIngredientDialog(),
           );
           if (ingredient != null) {
-            // TODO: Add ingredient to pantry (update provider/repository)
-            print('New ingredient: $ingredient');
+            ref.read(pantryProvider.notifier).addIngredient(ingredient);
           }
         },
         backgroundColor: colorScheme.primary,
