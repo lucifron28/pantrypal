@@ -9,6 +9,7 @@ import 'package:pantrypal/theme.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pantrypal/screens/settings_screen.dart';
+import 'package:pantrypal/widgets/auth_gate.dart';
 
 class PantryPalApp extends ConsumerWidget {
   const PantryPalApp({super.key});
@@ -31,12 +32,12 @@ class PantryPalApp extends ConsumerWidget {
           themeMode: themeMode,
           initialRoute: '/',
           routes: {
-            '/': (context) => HomeScreen(),
-            '/pantry': (context) => PantryScreen(),
-            '/recipes': (context) => RecipeSuggestionsScreen(),
-            '/paywall': (context) => PaywallScreen(),
-            '/profile': (context) => ProfileScreen(),
-            '/settings': (context) => SettingsScreen(),
+            '/': (context) => const AuthGate(child: HomeScreen()),
+            '/pantry': (context) => const AuthGate(child: PantryScreen()),
+            '/recipes': (context) => const AuthGate(child: RecipeSuggestionsScreen()),
+            '/paywall': (context) => const AuthGate(child: PaywallScreen()),
+            '/profile': (context) => const AuthGate(child: ProfileScreen()),
+            '/settings': (context) => const AuthGate(child: SettingsScreen()),
           },
         );
       },
