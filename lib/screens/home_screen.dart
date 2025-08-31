@@ -14,11 +14,29 @@ class HomeScreen extends ConsumerWidget {
     PaywallScreen(),
   ];
 
+  static final List<String> _titles = [
+    'Pantry',
+    'Recipes',
+    'Paywall',
+    'Profile',
+  ];
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final selectedIndex = ref.watch(bottomNavIndexProvider);
 
     return Scaffold(
+      appBar: AppBar(
+        title: Text(_titles[selectedIndex]),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.pushNamed(context, '/settings');
+            },
+            icon: const Icon(Icons.settings),
+          )
+        ],
+      ),
       body: _screens[selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
@@ -33,6 +51,10 @@ class HomeScreen extends ConsumerWidget {
           BottomNavigationBarItem(
             icon: Icon(Icons.lock),
             label: 'Paywall',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Profile',
           ),
         ],
         currentIndex: selectedIndex,
