@@ -15,9 +15,31 @@ class AuthScreen extends ConsumerWidget {
         foregroundColor: colorScheme.onSurface,
         elevation: 0,
       ),
-      body: const Padding(
-        padding: EdgeInsets.all(16.0),
-        child: AuthForm(),
+      body: Center(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                // Pantry/food icon for branding
+                Icon(Icons.kitchen, size: 64, color: colorScheme.primary),
+                const SizedBox(height: 16),
+                const Text(
+                  'PantryPal',
+                  style: TextStyle(
+                    fontSize: 32,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsetsGeometry.all(20.0),
+                  child:  AuthForm(),
+                  ),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }
