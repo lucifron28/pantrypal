@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pantrypal/providers/pantry_provider.dart';
 import 'package:pantrypal/widgets/pantry_list.dart';
+import 'package:pantrypal/widgets/add_ingredient_dialog.dart';
 
 class PantryScreen extends ConsumerWidget {
   const PantryScreen({super.key});
@@ -24,8 +25,15 @@ class PantryScreen extends ConsumerWidget {
         error: (e, st) => Center(child: Text('Error: $e')),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          // TODO: Show add ingredient modal
+        onPressed: () async {
+          final ingredient = await showDialog(
+            context: context,
+            builder: (context) => const AddIngredientDialog(),
+          );
+          if (ingredient != null) {
+            // TODO: Add ingredient to pantry (update provider/repository)
+            print('New ingredient: $ingredient');
+          }
         },
         backgroundColor: colorScheme.primary,
         tooltip: 'Add Ingredient',
