@@ -88,51 +88,54 @@ class _SignUpFormState extends State<SignUpForm> {
     final colorScheme = Theme.of(context).colorScheme;
     return Form(
       key: _formKey,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          TextFormField(
-            decoration: const InputDecoration(labelText: 'Email'),
-            keyboardType: TextInputType.emailAddress,
-            onChanged: (val) => _email = val,
-            validator: (val) => val != null && val.contains('@') ? null : 'Enter a valid email',
-          ),
-          TextFormField(
-            decoration: const InputDecoration(labelText: 'Password'),
-            obscureText: true,
-            onChanged: (val) => _password = val,
-            validator: (val) => val != null && val.length >= 6 ? null : 'Password too short',
-          ),
-          TextFormField(
-            controller: _confirmPasswordController,
-            decoration: const InputDecoration(labelText: 'Confirm Password'),
-            obscureText: true,
-            onChanged: (val) {},
-            validator: _validateConfirmPassword,
-          ),
-          if (_error != null) ...[
-            const SizedBox(height: 8),
-            Text(_error!, style: const TextStyle(color: Colors.red)),
-          ],
-          const SizedBox(height: 16),
-          _isLoading
-              ? const CircularProgressIndicator()
-              : SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: colorScheme.primary,
-                      foregroundColor: colorScheme.onPrimary,
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            TextFormField(
+              decoration: const InputDecoration(labelText: 'Email'),
+              keyboardType: TextInputType.emailAddress,
+              onChanged: (val) => _email = val,
+              validator: (val) => val != null && val.contains('@') ? null : 'Enter a valid email',
+            ),
+            TextFormField(
+              decoration: const InputDecoration(labelText: 'Password'),
+              obscureText: true,
+              onChanged: (val) => _password = val,
+              validator: (val) => val != null && val.length >= 6 ? null : 'Password too short',
+            ),
+            TextFormField(
+              controller: _confirmPasswordController,
+              decoration: const InputDecoration(labelText: 'Confirm Password'),
+              obscureText: true,
+              onChanged: (val) {},
+              validator: _validateConfirmPassword,
+            ),
+            if (_error != null) ...[
+              const SizedBox(height: 8),
+              Text(_error!, style: const TextStyle(color: Colors.red)),
+            ],
+            const SizedBox(height: 16),
+            _isLoading
+                ? const CircularProgressIndicator()
+                : SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: colorScheme.primary,
+                        foregroundColor: colorScheme.onPrimary,
+                      ),
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          _signUp();
+                        }
+                      },
+                      child: const Text('Sign Up'),
                     ),
-                    onPressed: () {
-                      if (_formKey.currentState!.validate()) {
-                        _signUp();
-                      }
-                    },
-                    child: const Text('Sign Up'),
                   ),
-                ),
-        ],
+          ],
+        ),
       ),
     );
   }
