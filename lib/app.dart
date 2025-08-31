@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:pantrypal/screens/home_screen.dart';
 import 'package:pantrypal/screens/pantry_screen.dart';
 import 'package:pantrypal/screens/recipe_suggestions_screen.dart';
+import 'package:pantrypal/screens/profile_screen.dart';
 import 'package:pantrypal/screens/paywall_screen.dart';
+import 'package:pantrypal/screens/settings_screen.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:pantrypal/theme.dart';
 
@@ -30,6 +32,8 @@ class PantryPalApp extends StatelessWidget {
             '/pantry': (context) => PantryScreen(),
             '/recipes': (context) => RecipeSuggestionsScreen(),
             '/paywall': (context) => PaywallScreen(),
+            '/profile': (context) => ProfileScreen(),
+            '/settings': (context) => SettingsScreen(),
           },
         );
       },
