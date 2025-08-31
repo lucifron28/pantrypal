@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pantrypal/screens/pantry_screen.dart';
+import 'package:pantrypal/screens/profile_screen.dart';
 import 'package:pantrypal/screens/recipe_suggestions_screen.dart';
 import 'package:pantrypal/screens/paywall_screen.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -12,6 +13,7 @@ class HomeScreen extends ConsumerWidget {
     PantryScreen(),
     RecipeSuggestionsScreen(),
     PaywallScreen(),
+    ProfileScreen(),
   ];
 
   static final List<String> _titles = [
