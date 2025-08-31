@@ -27,40 +27,48 @@ class HomeScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final selectedIndex = ref.watch(bottomNavIndexProvider);
 
+    final colorScheme = Theme.of(context).colorScheme;
     return Scaffold(
       appBar: AppBar(
         title: Text(_titles[selectedIndex]),
+        backgroundColor: colorScheme.surface,
+        foregroundColor: colorScheme.onSurface,
         actions: [
           IconButton(
             onPressed: () {
               Navigator.pushNamed(context, '/settings');
             },
             icon: const Icon(Icons.settings),
+            color: colorScheme.primary,
+            tooltip: 'Settings',
           )
         ],
+        elevation: 0,
       ),
       body: _screens[selectedIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
+      bottomNavigationBar: NavigationBar(
+        selectedIndex: selectedIndex,
+        onDestinationSelected: (index) => ref.read(bottomNavIndexProvider.notifier).state = index,
+        backgroundColor: colorScheme.surface,
+        indicatorColor: colorScheme.primaryContainer,
+        destinations: const [
+          NavigationDestination(
             icon: Icon(Icons.kitchen),
             label: 'Pantry',
           ),
-          BottomNavigationBarItem(
+          NavigationDestination(
             icon: Icon(Icons.receipt),
             label: 'Recipes',
           ),
-          BottomNavigationBarItem(
+          NavigationDestination(
             icon: Icon(Icons.lock),
             label: 'Paywall',
           ),
-          BottomNavigationBarItem(
+          NavigationDestination(
             icon: Icon(Icons.person),
             label: 'Profile',
           ),
         ],
-        currentIndex: selectedIndex,
-        onTap: (index) => ref.read(bottomNavIndexProvider.notifier).state = index,
       ),
     );
   }
