@@ -4,15 +4,18 @@ import 'package:pantrypal/screens/pantry_screen.dart';
 import 'package:pantrypal/screens/recipe_suggestions_screen.dart';
 import 'package:pantrypal/screens/profile_screen.dart';
 import 'package:pantrypal/screens/paywall_screen.dart';
-import 'package:pantrypal/screens/settings_screen.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:pantrypal/theme.dart';
 
-class PantryPalApp extends StatelessWidget {
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:pantrypal/screens/settings_screen.dart';
+
+class PantryPalApp extends ConsumerWidget {
   const PantryPalApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final themeMode = ref.watch(themeModeProvider);
     return DynamicColorBuilder(
       builder: (ColorScheme? dynamicLight, ColorScheme? dynamicDark) {
         return MaterialApp(
@@ -25,7 +28,7 @@ class PantryPalApp extends StatelessWidget {
             useMaterial3: true,
             colorScheme: dynamicDark ?? darkScheme,
           ),
-          themeMode: ThemeMode.system,
+          themeMode: themeMode,
           initialRoute: '/',
           routes: {
             '/': (context) => HomeScreen(),
