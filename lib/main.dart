@@ -5,17 +5,19 @@ import 'package:pantrypal/models/recipe.dart';
 import 'package:pantrypal/models/pantry.dart';
 import 'package:pantrypal/models/user_preferences.dart';
 import 'package:pantrypal/app.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp();
 
   await Hive.initFlutter();
 
   Hive.registerAdapter(IngredientAdapter());
   Hive.registerAdapter(RecipeAdapter());
   Hive.registerAdapter(PantryAdapter());
-  
 
   await Hive.openBox<Ingredient>('ingredients');
   await Hive.openBox<Recipe>('recipes');
