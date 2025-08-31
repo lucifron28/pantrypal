@@ -8,6 +8,32 @@ import 'package:pantrypal/services/pantry_repository.dart';
 import 'package:pantrypal/providers/repository_providers.dart';
 
 class PantryNotifier extends StateNotifier<Pantry> {
+
+	Future<void> updateIngredient(Ingredient updated) async {
+		final updatedIngredients = state.ingredients.map((i) => i.id == updated.id ? updated : i).toList();
+		final newPantry = Pantry(
+			id: state.id,
+			name: state.name,
+			ingredients: updatedIngredients,
+			ownerId: state.ownerId,
+			sharedWithUserIds: state.sharedWithUserIds,
+		);
+		state = newPantry;
+		await _repo.savePantry(newPantry);
+	}
+
+	Future<void> deleteIngredient(String ingredientId) async {
+		final updatedIngredients = state.ingredients.where((i) => i.id != ingredientId).toList();
+		final newPantry = Pantry(
+			id: state.id,
+			name: state.name,
+			ingredients: updatedIngredients,
+			ownerId: state.ownerId,
+			sharedWithUserIds: state.sharedWithUserIds,
+		);
+		state = newPantry;
+		await _repo.savePantry(newPantry);
+	}
 	final PantryRepository _repo;
 	final String _userId;
 
